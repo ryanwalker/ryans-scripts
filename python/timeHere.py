@@ -10,6 +10,6 @@ days = 'Day %s' % daysAtKubra
 weeks = int(math.ceil(daysAtKubra / 7.0))
 weeksString = 'Week %s' % weeks
 
-print 'Time at Keap'
-print weeksString
-print days
+print('Time at Keap')
+print(weeksString)
+print(days)
