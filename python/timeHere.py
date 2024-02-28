@@ -1,22 +1,22 @@
-import datetime
+from datetime import datetime, timedelta
 
 stints = [
   {
     'stint': 1,
-    'startDate': datetime.datetime(2005, 1, 27).date(),
-    'endDate': datetime.datetime(2017, 9, 22).date(),
+    'startDate': datetime(2005, 1, 27).date(),
+    'endDate': datetime(2017, 9, 22).date(),
     'name': 'infusionsoft'
   },
   {
     'stint': 2,
-    'startDate': datetime.datetime(2018, 1, 15).date(),
-    'endDate': datetime.datetime(2019, 3, 15).date(),
+    'startDate': datetime(2018, 1, 15).date(),
+    'endDate': datetime(2019, 3, 15).date(),
     'name': 'infusionsoft/Keap'
   },
   {
     'stint': 3,
-    'startDate': datetime.datetime(2022, 2, 28).date(),
-    'endDate': datetime.datetime.now().date(),
+    'startDate': datetime(2022, 2, 28).date(),
+    'endDate': datetime.now().date(),
     'name': 'Keap'
   }
 ]
@@ -32,15 +32,27 @@ for date in stints:
     total_days += abs((endDate - startDate).days)
     
     if current_stint == 3:
-        current_stint_days = abs((datetime.datetime.now().date() - startDate).days)
+        current_stint_days = abs((datetime.now().date() - startDate).days)
     
 
 years, days_remainder = divmod(total_days, 365)
 months, days = divmod(days_remainder, 30)
 
-print(f'Total: {years} years, {months} months, {days} days')
+print(f'\n\tTotal: {years} years, {months} months, {days} days')
     
 years, days_remainder = divmod(current_stint_days, 365)
 months, days = divmod(days_remainder, 30)
 
-print(f'Current: {years} years, {months} months, {days} days')
+print(f'\tCurrent: {years} years, {months} months, {days} days\n')
+
+
+
+
+current_date = datetime.now().date()
+
+delta = timedelta(days=total_days)
+
+# Subtract the timedelta from the current date to get the desired date
+desired_date = current_date - delta
+
+# print("\t(Effective Date", total_days, "days ago:", desired_date, ")")
