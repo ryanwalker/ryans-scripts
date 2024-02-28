@@ -1,15 +1,46 @@
 import datetime
-import math
 
-now = datetime.datetime.now().date()
-startDate = datetime.datetime(2022, 2, 28).date()
+stints = [
+  {
+    'stint': 1,
+    'startDate': datetime.datetime(2005, 1, 27).date(),
+    'endDate': datetime.datetime(2017, 9, 22).date(),
+    'name': 'infusionsoft'
+  },
+  {
+    'stint': 2,
+    'startDate': datetime.datetime(2018, 1, 15).date(),
+    'endDate': datetime.datetime(2019, 3, 15).date(),
+    'name': 'infusionsoft/Keap'
+  },
+  {
+    'stint': 3,
+    'startDate': datetime.datetime(2022, 2, 28).date(),
+    'endDate': datetime.datetime.now().date(),
+    'name': 'Keap'
+  }
+]
 
-daysAtKubra = abs((now - startDate).days) + 1
+current_stint_days = 0
+total_days = 0
 
-days = 'Day %s' % daysAtKubra
-weeks = int(math.ceil(daysAtKubra / 7.0))
-weeksString = 'Week %s' % weeks
+for date in stints:
+    current_stint = date['stint']
+    startDate = date['startDate']
+    endDate = date['endDate']
+    
+    total_days += abs((endDate - startDate).days)
+    
+    if current_stint == 3:
+        current_stint_days = abs((datetime.datetime.now().date() - startDate).days)
+    
 
-print('Time at Keap')
-print(weeksString)
-print(days)
+years, days_remainder = divmod(total_days, 365)
+months, days = divmod(days_remainder, 30)
+
+print(f'Total: {years} years, {months} months, {days} days')
+    
+years, days_remainder = divmod(current_stint_days, 365)
+months, days = divmod(days_remainder, 30)
+
+print(f'Current: {years} years, {months} months, {days} days')
